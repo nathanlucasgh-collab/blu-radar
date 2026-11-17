@@ -1,0 +1,16 @@
+package com.nathanlucas.bluerradar
+
+import android.bluetooth.BluetoothAdapter
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+
+class BootReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action == Intent.ACTION_BOOT_COMPLETED || intent.action == Intent.ACTION_LOCKED_BOOT_COMPLETED) {
+            if (Preferences.isEnabled(context)) {
+                RadarService.start(context)
+            }
+        }
+    }
+}
